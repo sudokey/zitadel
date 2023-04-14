@@ -471,6 +471,12 @@ func (l *Login) getThemeMode(r *http.Request) string {
 
 func (l *Login) isDarkMode(r *http.Request) bool {
 	cookie, err := r.Cookie("mode")
+	param := r.URL.Query().Get("mode")
+
+	if param == "dark" {
+		return true
+	}
+
 	if err != nil {
 		return false
 	}

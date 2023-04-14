@@ -1,10 +1,13 @@
-const usesDarkTheme = hasDarkModeOverwriteCookie() || (!hasLightModeOverwriteCookie() && window.matchMedia('(prefers-color-scheme: dark)').matches);
-if (usesDarkTheme) {
+if (modeOverwriteParam('dark')) {
     document.documentElement.classList.replace('lgn-light-theme', 'lgn-dark-theme');
     writeModeCookie('dark');
-} else {
+} else if (modeOverwriteParam('light')) {
     document.documentElement.classList.replace('lgn-dark-theme', 'lgn-light-theme');
     writeModeCookie('light');
+}
+
+function modeOverwriteParam(name) {
+    return new URLSearchParams(window.location.search).get('mode') === name;
 }
 
 function hasDarkModeOverwriteCookie() {
@@ -16,10 +19,7 @@ function hasLightModeOverwriteCookie() {
 }
 
 function writeModeCookie(mode) {
-    let cookieMode = getCookie('mode')
-    if (cookieMode === '' || cookieMode.startsWith('auto')) {
-        setCookie('mode', 'auto-' + mode, 365);
-    }
+    setCookie('mode', mode, 365);
 }
 
 function getCookie(cname) {

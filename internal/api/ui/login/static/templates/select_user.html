@@ -16,7 +16,6 @@
 
 
 <form action="{{ userSelectionUrl }}" method="POST">
-
     {{ .CSRF }}
 
     <input type="hidden" name="authRequestID" value="{{ .AuthReqID }}" />
@@ -28,7 +27,7 @@
         {{ range $user := .Users }}
         {{ $sessionState := (printf "SelectAccount.SessionState%v" $user.UserSessionState) }}
         {{if $user.SelectionPossible}}
-        <button type="submit" name="userID" value="{{$user.UserID}}" class="lgn-account" 
+        <button type="submit" name="userID" value="{{$user.UserID}}" class="lgn-account"
         {{if not $user.SelectionPossible}}disabled title="{{t "Errors.User.NotAllowedOrg"}}"{{end}}>
             <div class="left">
                 <div class="lgn-avatar" {{if not $user.AvatarKey}}loginname="{{$user.LoginName}}"{{end}}>

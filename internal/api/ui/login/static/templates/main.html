@@ -8,7 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link rel="stylesheet" href="{{ resourceThemeUrl "css/zitadel.css" .Theme }}" type="text/css">
-    
+    <link rel="stylesheet" href="{{ resourceThemeUrl "css/explorer.css" .Theme }}" type="text/css">
+
     {{ if hasCustomPolicy .LabelPolicy }}
         <link rel="stylesheet" href="{{ variablesCssFileUrl .PrivateLabelingOrgID .LabelPolicy}}" type="text/css">
         {{ $icon := customIconResource .PrivateLabelingOrgID .LabelPolicy .DarkMode }}
@@ -30,8 +31,9 @@
 <!-- lgn-app-background tints the background to the selected theme colors -->
 <body class="lgn-app-background">
     <div class="lgn-grow">
+        {{template "header" .}}
+
         <div class="lgn-max-width-wrapper">
-            {{template "header" .}}
             <div class="content-container">
                 {{end}}
                     <!-- here goes the content -->
