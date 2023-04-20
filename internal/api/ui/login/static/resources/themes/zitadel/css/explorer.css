@@ -285,7 +285,7 @@ label,
   box-shadow: none !important;
 }
 
-.lgn-head p {
+.lgn-head > p {
   color: var(--zitadel-color-form-head-text);
 }
 

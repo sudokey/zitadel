@@ -9,6 +9,8 @@ const (
 	ProjectIDScopeZITADEL = "zitadel"
 	AudSuffix             = ":aud"
 	SelectIDPScope        = "urn:zitadel:iam:org:idp:id:"
+	DarkModeScope         = "mode:dark"
+	LightModeScope        = "mode:light"
 )
 
 // TODO: Change AuthRequest to interface and let oidcauthreqesut implement it

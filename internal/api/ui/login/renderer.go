@@ -363,8 +363,8 @@ func (l *Login) getBaseData(r *http.Request, authReq *domain.AuthRequest, titleI
 		Title:                  title,
 		Description:            description,
 		Theme:                  l.getTheme(r),
-		ThemeMode:              l.getThemeMode(r),
-		DarkMode:               l.isDarkMode(r),
+		ThemeMode:              l.getThemeMode(r, authReq),
+		DarkMode:               l.isDarkMode(r, authReq),
 		PrivateLabelingOrgID:   l.getPrivateLabelingID(r, authReq),
 		OrgID:                  l.getOrgID(r, authReq),
 		OrgName:                l.getOrgName(authReq),
@@ -462,14 +462,28 @@ func (l *Login) getTheme(r *http.Request) string {
 	return "zitadel"
 }
 
-func (l *Login) getThemeMode(r *http.Request) string {
-	if l.isDarkMode(r) {
+func (l *Login) getThemeMode(r *http.Request, authReq *domain.AuthRequest) string {
+	if l.isDarkMode(r, authReq) {
 		return "lgn-dark-theme"
 	}
 	return "lgn-light-theme"
 }
 
-func (l *Login) isDarkMode(r *http.Request) bool {
+func (l *Login) isDarkMode(r *http.Request, authReq *domain.AuthRequest) bool {
+	if authReq != nil {
+		switch request := authReq.Request.(type) {
+		case *domain.AuthRequestOIDC:
+			for _, scope := range request.Scopes {
+				if scope == domain.DarkModeScope {
+					return true
+				}
+				if scope == domain.LightModeScope {
+					return false
+				}
+			}
+		}
+	}
+
 	cookie, err := r.Cookie("mode")
 	param := r.URL.Query().Get("mode")
 

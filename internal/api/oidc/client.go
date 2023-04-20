@@ -34,6 +34,8 @@ const (
 	ScopeResourceOwner      = "urn:zitadel:iam:user:resourceowner"
 	ClaimResourceOwner      = ScopeResourceOwner + ":"
 	ClaimActionLogFormat    = "urn:zitadel:iam:action:%s:log"
+	ScopeDarkMode           = "mode:dark"
+	ScopeLightMode          = "mode:light"
 
 	oidcCtx = "oidc"
 )

@@ -121,6 +121,15 @@ func (c *Client) IsScopeAllowed(scope string) bool {
 	if scope == ScopeProjectsRoles {
 		return true
 	}
+	if scope == ScopeProjectsRoles {
+		return true
+	}
+	if scope == ScopeDarkMode {
+		return true
+	}
+	if scope == ScopeLightMode {
+		return true
+	}
 	for _, allowedScope := range c.allowedScopes {
 		if scope == allowedScope {
 			return true
